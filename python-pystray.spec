@@ -18,7 +18,7 @@
 
 
 Name:		python-%{upname}
-Version:	0.14.2
+Version:	0.14.3
 Release:	1%{?dist}
 Summary:	%{common_sum}
 
@@ -165,6 +165,9 @@ done
 
 
 %changelog
+* Thu Mar 30 2017 Björn Esser <besser82@fedoraproject.org> - 0.14.3-1
+- New upstream release (rhbz#1437277)
+
 * Wed Mar 29 2017 Björn Esser <besser82@fedoraproject.org> - 0.14.2-1
 - Initial import (rhbz#1436347)
 
