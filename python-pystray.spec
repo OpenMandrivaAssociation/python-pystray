@@ -19,7 +19,7 @@
 
 Name:		python-%{upname}
 Version:	0.14.3
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	%{common_sum}
 
 License:	LGPLv3+
@@ -35,15 +35,15 @@ BuildArch:	noarch
 %package -n python2-%{upname}
 Summary:	%{common_sum}
 
-BuildRequires:	python-pillow
-BuildRequires:	python-setuptools
-BuildRequires:	python-six
-BuildRequires:	python-xlib		>= 0.17
+BuildRequires:	python2-pillow
+BuildRequires:	python2-setuptools
+BuildRequires:	python2-six
+BuildRequires:	python2-xlib		>= 0.17
 BuildRequires:	python2-devel		>= 2.7
 
-Requires:	python-pillow
-Requires:	python-six
-Requires:	python-xlib		>= 0.17
+Requires:	python2-pillow
+Requires:	python2-six
+Requires:	python2-xlib		>= 0.17
 
 %{?python_provide:%python_provide python2-%{upname}}
 
@@ -55,7 +55,7 @@ Requires:	python-xlib		>= 0.17
 Summary:	Documentation-files for python2-%{upname}
 
 BuildRequires:	fdupes
-BuildRequires:	python-sphinx		>= 1.3.1
+BuildRequires:	python2-sphinx		>= 1.3.1
 
 %description -n python2-%{upname}-doc
 This package contains the Documentation-files for python2-%{upname}.
@@ -165,6 +165,10 @@ done
 
 
 %changelog
+* Wed Feb 28 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.14.3-4
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.14.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
