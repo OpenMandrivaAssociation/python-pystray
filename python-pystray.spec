@@ -19,7 +19,7 @@
 
 Name:		python-%{upname}
 Version:	0.14.3
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	%{common_sum}
 
 License:	LGPLv3+
@@ -165,6 +165,9 @@ done
 
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.14.3-5
+- Rebuilt for Python 3.7
+
 * Wed Feb 28 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.14.3-4
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
