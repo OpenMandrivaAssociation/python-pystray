@@ -19,7 +19,7 @@
 
 Name:		python-%{upname}
 Version:	0.14.3
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	%{common_sum}
 
 License:	LGPLv3+
@@ -165,6 +165,9 @@ done
 
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.14.3-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.14.3-5
 - Rebuilt for Python 3.7
 
