@@ -1,13 +1,3 @@
-%if 0%{?fedora} || 0%{?rhel} >= 8
-%bcond_without python3
-%global _pkgdocdir_py2 %{_docdir}/python2-%{upname}
-%global _pkgdocdir_py3 %{_docdir}/python3-%{upname}
-%else
-%bcond_with python3
-%global _pkgdocdir_py2 %{_docdir}/python2-%{upname}-%{version}
-%global _pkgdocdir_py3 %{_docdir}/python3-%{upname}-%{version}
-%endif
-
 # Testsuite needs human interaction.
 %bcond_with test
 
@@ -19,7 +9,7 @@
 
 Name:		python-%{upname}
 Version:	0.14.3
-Release:	6%{?dist}
+Release:	7%{?dist}
 Summary:	%{common_sum}
 
 License:	LGPLv3+
@@ -32,44 +22,14 @@ BuildArch:	noarch
 %{common_desc}
 
 
-%package -n python2-%{upname}
-Summary:	%{common_sum}
-
-BuildRequires:	python2-pillow
-BuildRequires:	python2-setuptools
-BuildRequires:	python2-six
-BuildRequires:	python2-xlib		>= 0.17
-BuildRequires:	python2-devel		>= 2.7
-
-Requires:	python2-pillow
-Requires:	python2-six
-Requires:	python2-xlib		>= 0.17
-
-%{?python_provide:%python_provide python2-%{upname}}
-
-%description -n python2-%{upname}
-%{common_desc}
-
-
-%package -n python2-%{upname}-doc
-Summary:	Documentation-files for python2-%{upname}
-
-BuildRequires:	fdupes
-BuildRequires:	python2-sphinx		>= 1.3.1
-
-%description -n python2-%{upname}-doc
-This package contains the Documentation-files for python2-%{upname}.
-
-
-%if %{with python3}
 %package -n python3-%{upname}
 Summary:	%{common_sum}
 
-BuildRequires:	python3-devel		>= 3.4
+BuildRequires:	python3-devel >= 3.4
 BuildRequires:	python3-pillow
 BuildRequires:	python3-setuptools
 BuildRequires:	python3-six
-BuildRequires:	python3-xlib		>= 0.17
+BuildRequires:	python3-xlib >= 0.17
 
 Requires:	python3-pillow
 Requires:	python3-six
@@ -85,11 +45,10 @@ Requires:	python3-xlib		>= 0.17
 Summary:	Documentation-files for python3-%{upname}
 
 BuildRequires:	fdupes
-BuildRequires:	python3-sphinx		>= 1.3.1
+BuildRequires:	python3-sphinx >= 1.3.1
 
 %description -n python3-%{upname}-doc
 This package contains the Documentation-files for python3-%{upname}.
-%endif # with python3
 
 
 %prep
@@ -100,14 +59,9 @@ This package contains the Documentation-files for python3-%{upname}.
 
 
 %build
-%py2_build
-%{_bindir}/sphinx-build-%{python2_version} docs docs/build-%{python2_version}/html
-%fdupes -s docs/build-%{python2_version}
-%if %{with python3}
 %py3_build
-%{_bindir}/sphinx-build-%{python3_version} docs docs/build-%{python3_version}/html
+sphinx-build-3 docs docs/build-%{python3_version}/html
 %fdupes -s docs/build-%{python3_version}
-%endif # with python3
 for f in .buildinfo .doctrees .inv ; do
 	%{_bindir}/find docs/ -name "*${f}*" -print0 |			\
 		%{_bindir}/xargs -0 %{__rm} -frv
@@ -115,56 +69,29 @@ done
 
 
 %install
-%py2_install
-%{__mkdir} -p %{buildroot}%{_pkgdocdir_py2}
-%{__cp} -pr CHANGES.rst README.rst docs/build-%{python2_version}/html	\
-	%{buildroot}%{_pkgdocdir_py2}
-%if %{with python3}
 %py3_install
-%{__mkdir} -p %{buildroot}%{_pkgdocdir_py3}
-%{__cp} -pr CHANGES.rst README.rst docs/build-%{python3_version}/html	\
-	%{buildroot}%{_pkgdocdir_py3}
-%endif # with python3
-
 
 %if %{with test}
 %check
-%{__python2} setup.py test
-%if %{with python3}
 %{__python3} setup.py test
-%endif # with python3
 %endif # with test
 
 
-%files -n python2-%{upname}
-%license COPYING*
-%doc %dir %{_pkgdocdir_py2}
-%doc %{_pkgdocdir_py2}/README.rst
-%{python2_sitelib}/%{upname}
-%{python2_sitelib}/%{upname}-%{version}-py%{python2_version}.egg-info
-
-
-%files -n python2-%{upname}-doc
-%license %{_datadir}/licenses/python2-%{upname}*
-%doc %{_pkgdocdir_py2}
-
-
-%if %{with python3}
 %files -n python3-%{upname}
 %license COPYING*
-%doc %dir %{_pkgdocdir_py3}
-%doc %{_pkgdocdir_py3}/README.rst
+%doc README.rst
 %{python3_sitelib}/%{upname}
 %{python3_sitelib}/%{upname}-%{version}-py%{python3_version}.egg-info
 
-
 %files -n python3-%{upname}-doc
-%license %{_datadir}/licenses/python3-%{upname}*
-%doc %{_pkgdocdir_py3}
-%endif # with python3
+%doc CHANGES.rst docs/build-%{python3_version}/html
 
 
 %changelog
+* Thu Oct 11 2018 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.14.3-7
+- Python2 binary package has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.14.3-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
