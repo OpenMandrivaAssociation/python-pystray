@@ -5,13 +5,13 @@
 
 
 Name:		python-%{upname}
-Version:	0.14.3
+Version:	0.14.4
 Release:	1
 Summary:	Python module for system tray integration
 
 License:	LGPLv3+
 URL:		https://github.com/moses-palmer/%{upname}
-Source0:	%{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:	%{url}/archive/v%{version}.tar.gz#/%{upname}-%{version}.tar.gz
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	python3dist(pillow)
 BuildRequires:	python3dist(setuptools)
