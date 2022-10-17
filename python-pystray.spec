@@ -5,7 +5,7 @@
 
 
 Name:		python-%{upname}
-Version:	0.16.0
+Version:	0.19.4
 Release:	1
 Summary:	Python module for system tray integration
 
