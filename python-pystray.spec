@@ -6,7 +6,7 @@
 
 Name:		python-%{upname}
 Version:	0.19.4
-Release:	1
+Release:	2
 Summary:	Python module for system tray integration
 
 License:	LGPLv3+
